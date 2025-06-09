@@ -1,0 +1,41 @@
+<div class="container my-5 text-center">
+
+  <h2 class="mb-4">Bienvenido, {{ nombreUsuario }}</h2>
+
+  <div class="card shadow">
+    <div class="card-body text-start">
+      <p><strong>Correo:</strong> {{ correoUsuario }}</p>
+      <p><strong>Solicitudes contratadas:</strong></p>
+      <ul>
+  <li *ngFor="let servicio of listaServicios" class="list-group-item mb-3 border rounded p-3">
+    <!-- Si existe la propiedad 'mensaje', lo mostramos directamente -->
+    <ng-container *ngIf="servicio.mensaje; else solicitudDetalle">
+      {{ servicio.mensaje }}
+    </ng-container>
+
+    <ng-template #solicitudDetalle>
+      <strong>Detalles:</strong> {{ servicio.detalles || 'Sin detalles' }}<br>
+      <strong>Dirección:</strong> {{ servicio.direccion || 'No especificada' }}<br>
+      <strong>Estado:</strong>
+      <span
+        [ngClass]="{
+          'badge': true,
+          'bg-success': servicio.estado === 'aceptado',
+          'bg-danger': servicio.estado === 'rechazado',
+          'bg-secondary': !['aceptado', 'rechazado'].includes(servicio.estado)
+        }"
+      >
+        {{ servicio.estado || 'pendiente' }}
+      </span>
+    </ng-template>
+  </li>
+</ul>
+      <p>
+        <strong>Soporte:</strong>
+        Puedes contactar a soporte a través del correo
+        <a href="mailto:soporte&#64;afondolimpiezas.com">soporte&#64;afondolimpiezas.com</a>
+      </p>
+    </div>
+  </div>
+</div>
+

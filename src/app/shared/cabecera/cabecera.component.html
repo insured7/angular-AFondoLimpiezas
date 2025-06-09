@@ -1,0 +1,43 @@
+<!-- src/app/components/header/header.component.html -->
+<header class="container-fluid bg-success text-white py-3">
+  <div class="d-flex align-items-center justify-content-between flex-wrap">
+    <div class="d-flex align-items-center">
+      <a routerLink="/">
+        <img src="assets/img/AFondoLogo.png" alt="Logo" class="img-fluid" style="height: 100px; width: 180px" />
+      </a>
+    </div>
+
+    <div>
+      <a routerLink="/" class="text-white text-decoration-none">
+        <h4 class="ms-3 mb-0 fw-bold text-center w-100 d-flex flex-column align-items-center justify-content-center">
+          A FONDO LIMPIEZAS
+        </h4>
+      </a>
+    </div>
+
+    <nav class="d-flex gap-2 mt-3 mt-md-0">
+      <button class="btn btn-light fw-bold" (click)="navigateTo('/')">Inicio</button>
+      <button class="btn btn-light fw-bold" (click)="navigateTo('/sobre-nosotros')">Sobre Nosotros</button>
+
+      <button class="btn btn-light fw-bold" *ngIf="!rol || rol === 'USUARIO'" (click)="navigateTo('/presupuesto')">
+        Presupuesto
+      </button>
+
+      <button class="btn btn-light fw-bold" *ngIf="rol === 'USUARIO'" (click)="navigateTo('/dashboard-usuario')">
+        Dashboard Usuario
+      </button>
+
+      <button class="btn btn-light fw-bold" *ngIf="rol === 'EMPLEADO'" (click)="navigateTo('/dashboard-empleado')">
+        Dashboard Empleado
+      </button>
+
+      <button class="btn btn-light fw-bold" *ngIf="rol === 'ADMIN'" (click)="navigateTo('/dashboard-admin')">
+        Dashboard Admin
+      </button>
+
+      <button class="btn btn-light fw-bold" *ngIf="!isLoggedIn" (click)="navigateTo('/login')">Login</button>
+      <button class="btn btn-danger fw-bold" *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+    </nav>
+  </div>
+</header>
+

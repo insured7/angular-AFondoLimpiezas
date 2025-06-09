@@ -1,0 +1,62 @@
+
+<div  class="login-container mx-auto my-5 p-4 shadow rounded" style="max-width: 400px;">
+  
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="form-group mb-3">
+    <label for="correo">Correo Electrónico</label>
+    <input
+      type="email"
+      id="correo"
+      class="form-control"
+      formControlName="correo"
+      autocomplete="off"
+    />
+    <div *ngIf="loginForm.get('correo')?.invalid && loginForm.get('correo')?.touched" class="text-danger">
+      El correo es obligatorio y debe ser válido.
+    </div>
+  </div>
+
+  <div class="form-group mb-3">
+    <label for="contrasenia">Contraseña</label>
+    <input
+      type="password"
+      id="contrasenia"
+      class="form-control"
+      formControlName="contrasenia"
+      autocomplete="off"
+    />
+    <div *ngIf="loginForm.get('contrasenia')?.invalid && loginForm.get('contrasenia')?.touched" class="text-danger">
+      La contraseña es obligatoria.
+    </div>
+  </div>
+
+  <div class="form-group mb-3">
+    <label for="userType">Tipo de Usuario</label>
+    <select
+      id="userType"
+      class="form-control"
+      formControlName="userType"
+    >
+      <option value="user">Usuario</option>
+      <option value="employee">Empleado</option>
+    </select>
+    <div *ngIf="loginForm.get('userType')?.invalid && loginForm.get('userType')?.touched" class="text-danger">
+      Debes seleccionar un tipo de usuario.
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <button type="submit" class="btn btn-success">Ingresar</button>
+  </div>
+
+  <div class="text-center mt-3">
+    <small>
+      ¿No tienes cuenta?
+      <a routerLink="/registro">Regístrate aquí</a>
+    </small>
+  </div>
+
+  <div class="text-danger mt-3">{{ errorMessage }}</div>
+</form>
+
+</div>
