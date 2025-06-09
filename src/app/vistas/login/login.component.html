@@ -1,6 +1,6 @@
 
-<div  class="login-container mx-auto my-5 p-4 shadow rounded" style="max-width: 400px;">
-  
+<div  class="login-container mx-auto my-5 p-4 shadow rounded" style="max-width: 400px; ">
+
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
   <div class="form-group mb-3">
     <label for="correo">Correo Electrónico</label>
@@ -32,14 +32,14 @@
 
   <div class="form-group mb-3">
     <label for="userType">Tipo de Usuario</label>
-    <select
-      id="userType"
-      class="form-control"
-      formControlName="userType"
-    >
-      <option value="user">Usuario</option>
-      <option value="employee">Empleado</option>
-    </select>
+<select
+  id="userType"
+  class="form-control"
+  formControlName="userType"
+>
+  <option value="user">Usuario</option>
+  <option value="employee">Empleado</option>
+</select>
     <div *ngIf="loginForm.get('userType')?.invalid && loginForm.get('userType')?.touched" class="text-danger">
       Debes seleccionar un tipo de usuario.
     </div>

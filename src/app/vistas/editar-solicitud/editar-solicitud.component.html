@@ -1,0 +1,30 @@
+<div class="container mt-5" style="max-width: 600px;">
+  <h2 class="mb-4 text-center">Editar Solicitud</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label">Estado</label>
+      <select class="form-select" formControlName="estado">
+        <option value="Pendiente">Pendiente</option>
+        <option value="En Proceso">En Proceso</option>
+        <option value="Completado">Completado</option>
+        <option value="Cancelado">Cancelado</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Detalles</label>
+      <textarea class="form-control" formControlName="detalles" rows="4"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Dirección</label>
+      <input type="text" class="form-control" formControlName="direccion">
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Guardar Cambios</button>
+    <a routerLink="/dashboard-admin" class="btn btn-secondary ms-2">Volver</a>
+
+    <div class="mt-3 text-danger">{{ errorMessage }}</div>
+  </form>
+</div>

@@ -1,0 +1,50 @@
+<div class="container-fluid py-5 d-flex align-items-center justify-content-center"
+         style="background: url('static/img/ImagenFondo2.jpg'); min-height: 100vh; background-size: cover; background-position: center">
+      <div class="row w-100 justify-content-center">
+        <div class="col-lg-5 col-md-8 mx-auto p-4 bg-light rounded shadow-lg">
+          <section id="presupuesto">
+            <h2 class="text-center mb-4">Solicitar Presupuesto</h2>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre o Empresa</label>
+                    <input formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre o empresa" />
+                    <div *ngIf="form.controls['nombre'].invalid && form.controls['nombre'].touched" class="text-danger">
+                      El nombre es obligatorio.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="direccion" class="form-label">Dirección</label>
+                    <input formControlName="direccion" type="text" class="form-control" id="direccion" placeholder="Ingresa la dirección" />
+                    <div *ngIf="form.controls['direccion'].invalid && form.controls['direccion'].touched" class="text-danger">
+                      La dirección es obligatoria.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="detalles" class="form-label">Detalles del Servicio</label>
+                <textarea formControlName="detalles" class="form-control" id="detalles" rows="4" placeholder="Detalla el servicio que necesitas"></textarea>
+                <div *ngIf="form.controls['detalles'].invalid && form.controls['detalles'].touched" class="text-danger">
+                  Los detalles son obligatorios.
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-lg" [disabled]="form.invalid || cargando">
+                  {{ cargando ? 'Enviando...' : 'Solicitar Presupuesto' }}
+                </button>
+              </div>
+            </form>
+
+            <div *ngIf="mensaje" [ngClass]="{'alert alert-success mt-3': exito, 'alert alert-danger mt-3': !exito}">
+              {{ mensaje }}
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>

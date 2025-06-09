@@ -16,10 +16,11 @@ export class AuthService {
   }
 
   // Guarda el token y rol en memoria (solo durante la sesión de navegador)
-  setSession(token: string, rol: 'USUARIO' | 'EMPLEADO' | 'ADMIN'): void {
-    this.token = token;
-    this.rol = rol;
-  }
+  setSession(token: string, rol: 'ADMIN' | 'USUARIO' | 'EMPLEADO') {
+  this.token = token;
+  this.rol = rol;
+}
+
 
   getToken(): string | null {
     return this.token;
