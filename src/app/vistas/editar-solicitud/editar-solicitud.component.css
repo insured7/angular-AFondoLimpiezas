@@ -1,0 +1,23 @@
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  max-width: 600px;
+  padding: 1rem;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
+  text-align: center;
+}
