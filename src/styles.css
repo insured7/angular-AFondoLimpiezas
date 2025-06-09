@@ -1,2 +1,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-select-panel {
+  z-index: 1000 !important;
+}
+.estado-panel {
+  z-index: 10000 !important;
+  position: absolute !important;
+}
+

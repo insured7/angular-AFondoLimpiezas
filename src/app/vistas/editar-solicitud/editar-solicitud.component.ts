@@ -27,7 +27,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatIconModule,
   ],
-  templateUrl: './editar-solicitud.component.html'
+  templateUrl: './editar-solicitud.component.html',
+  styleUrl: './editar-solicitud.component.css'
 })
 export class EditarSolicitudComponent implements OnInit {
   form!: FormGroup;

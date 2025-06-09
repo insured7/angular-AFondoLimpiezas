@@ -1,34 +1,35 @@
 <div class="contenedor">
-  <h2>Editar Solicitud</h2>
+  <h2 class="titulo">Editar Solicitud</h2>
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill">
-      <mat-label>Estado</mat-label>
-      <mat-select formControlName="estado">
-        <mat-option value="Pendiente">Pendiente</mat-option>
-        <mat-option value="En Proceso">En Proceso</mat-option>
-        <mat-option value="Completado">Completado</mat-option>
-        <mat-option value="Cancelado">Cancelado</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="formulario">
+    <mat-form-field appearance="outline">
+  <mat-label>Estado</mat-label>
+  <mat-select formControlName="estado" panelClass="estado-panel">
+    <mat-option value="Pendiente">Pendiente</mat-option>
+    <mat-option value="En Proceso">En Proceso</mat-option>
+    <mat-option value="Completado">Completado</mat-option>
+    <mat-option value="Cancelado">Cancelado</mat-option>
+  </mat-select>
+</mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="campo">
       <mat-label>Detalles</mat-label>
       <textarea matInput rows="4" formControlName="detalles"></textarea>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="campo">
       <mat-label>Dirección</mat-label>
       <input matInput type="text" formControlName="direccion" />
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
-      Guardar Cambios
-    </button>
-
-    <button mat-button color="accent" routerLink="/dashboard-admin" style="margin-top: 0.5rem">
-      Volver
-    </button>
+    <div class="botones">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        Guardar Cambios
+      </button>
+      <button mat-button color="accent" routerLink="/dashboard-admin">
+        Volver
+      </button>
+    </div>
 
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
   </form>
