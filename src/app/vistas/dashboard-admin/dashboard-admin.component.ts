@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/servicios/auth.service';
+import { AlertDialogComponent } from '../../shared/alert-dialog/alert-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard-admin',
@@ -22,7 +25,11 @@ export class DashboardAdminComponent implements OnInit {
   empleadoId = 0;
   rolEmpleado = '';
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
+  constructor(private http: HttpClient,
+     private router: Router,
+      private authService: AuthService,
+    private dialog: MatDialog,
+  private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     const token = this.authService.getToken();
@@ -62,16 +69,22 @@ export class DashboardAdminComponent implements OnInit {
   }
 
   eliminarSolicitud(id: number): void {
-    if (!confirm(`¿Eliminar solicitud ID ${id}?`)) return;
-
-    this.http.delete(`http://localhost:8080/admin/solicitudes/${id}`, { headers: this.getHeaders() }).subscribe({
-      next: () => {
-        this.mostrarAlerta('Solicitud eliminada.', 'success');
-        this.cargarSolicitudes(this.authService.getToken()!);
-      },
-      error: () => this.mostrarAlerta('No se pudo eliminar la solicitud.', 'danger')
-    });
-  }
+  this.dialog.open(AlertDialogComponent, {
+    data: { message: `¿Estás seguro de que deseas eliminar la solicitud con ID ${id}?` }
+  }).afterClosed().subscribe((confirmado: boolean) => {
+    if (confirmado) {
+      this.http.delete(`http://localhost:8080/admin/solicitudes/${id}`, {
+        headers: this.getHeaders()
+      }).subscribe({
+        next: () => {
+          this.mostrarNotificacion('Solicitud eliminada.', 'success');
+          this.cargarSolicitudes(this.authService.getToken()!);
+        },
+        error: () => this.mostrarNotificacion('No se pudo eliminar la solicitud.', 'error')
+      });
+    }
+  });
+}
 
   asignarEmpleado(): void {
   if (!this.solicitudId || !this.empleadoId || !this.rolEmpleado.trim()) {
@@ -121,4 +134,19 @@ export class DashboardAdminComponent implements OnInit {
     this.alerta = { mensaje, tipo };
     setTimeout(() => this.alerta = { mensaje: '', tipo: '' }, 4000);
   }
+
+  mostrarAlertaMaterial(mensaje: string){
+    this.dialog.open(AlertDialogComponent,{
+      data: {message: mensaje}
+    })
+  }
+
+  mostrarNotificacion(mensaje: string, tipo: 'success' | 'error') {
+  this.snackBar.open(mensaje, 'Cerrar', {
+    duration: 4000,
+    horizontalPosition: 'center',
+    verticalPosition: 'top',
+    panelClass: tipo === 'success' ? 'snackbar-success' : 'snackbar-error'
+  });
+}
 }
