@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.invalid) return;
-    
+
     const { correo, contrasenia, userType } = this.loginForm.value;
     const loginUrl =
   userType === 'user' || userType === 'admin'
@@ -50,7 +50,7 @@ if (userType === 'user') {
 } else if (userType === 'employee' || userType === 'admin') {
   rol = data.esAdmin ? 'ADMIN' : 'EMPLEADO';
 } else {
-  rol = 'USUARIO'; // fallback
+  rol = 'USUARIO';
 }
 
 

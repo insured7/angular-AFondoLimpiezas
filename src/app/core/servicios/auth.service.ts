@@ -15,7 +15,7 @@ export class AuthService {
     return this.http.post(url, credentials);
   }
 
-  // Guarda el token y rol en memoria (solo durante la sesión de navegador)
+  // Guardo token y rol en memoria
   setSession(token: string, rol: 'ADMIN' | 'USUARIO' | 'EMPLEADO') {
   this.token = token;
   this.rol = rol;

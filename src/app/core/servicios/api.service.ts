@@ -9,9 +9,10 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
   // URL base del backend
-  private baseUrl = 'http://localhost:8080'; // Ajusta la URL base según tu backend
+  private baseUrl = 'http://localhost:8080';
 
-  // 🔐 AUTENTICACIÓN
+
+  //Login y Registrar empleado
   login(data: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/auth/login`, data);
   }
@@ -20,11 +21,7 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/auth/registro-usuario`, data);
   }
 
-  activarCuenta(token: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/auth/activar?token=${token}`);
-  }
-
-  // 👤 USUARIOS
+  //Usuarios
   getUsuarios(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/usuarios`);
   }
@@ -33,16 +30,26 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/usuarios/${id}`);
   }
 
-  // 👔 EMPLEADOS
+
+  //Empleados
   getEmpleados(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/empleados`);
   }
 
-  // 🧾 SOLICITUDES DE PRESUPUESTO
+  getDatosEmpleado(token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + token
+    });
+    return this.http.get<any>(`${this.baseUrl}/dashboard/empleado`, { headers });
+  }
+
+
+  //Presupuesto
   crearPresupuesto(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/solicitudes`, data);
   }
 
+  //Solicitudes
   getSolicitudes(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/solicitudes`);
   }
@@ -55,10 +62,5 @@ export class ApiService {
     return this.http.put(`${this.baseUrl}/solicitudes/${id}`, data);
   }
 
-  getDatosEmpleado(token: string): Observable<any> {
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + token
-    });
-    return this.http.get<any>(`${this.baseUrl}/dashboard/empleado`, { headers });
-  }
+
 }

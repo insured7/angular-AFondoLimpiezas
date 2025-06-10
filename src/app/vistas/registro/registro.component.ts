@@ -49,7 +49,7 @@ export class RegistroComponent implements OnInit {
       .subscribe({
         next: () => {
           alert('Registro exitoso.');
-          this.router.navigate(['/']); // Redirige a home o landing page
+          this.router.navigate(['/']);
         },
         error: (err) => {
           err.error ? alert('Error al registrar: ' + err.error) : alert('Error de conexión con el servidor.');

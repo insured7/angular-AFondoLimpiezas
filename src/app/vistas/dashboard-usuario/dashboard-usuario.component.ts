@@ -57,7 +57,7 @@ export class DashboardUsuarioComponent implements OnInit {
   this.http.get<any[]>('http://localhost:8080/dashboard/usuario/solicitudes', { headers: this.getHeaders(token) }).subscribe({
     next: (data) => {
       if (data.length === 0) {
-        // Creamos un objeto con una propiedad especial para el mensaje vacío
+
         this.listaServicios = [{ mensaje: 'No hay solicitudes registradas.' }];
       } else {
         this.listaServicios = data;
@@ -65,7 +65,7 @@ export class DashboardUsuarioComponent implements OnInit {
     },
     error: (err) => {
       console.error('Error al cargar solicitudes:', err);
-      // Opcional: mostrar mensaje de error en listaServicios
+
       this.listaServicios = [{ mensaje: 'Error al cargar solicitudes.' }];
     }
   });

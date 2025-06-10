@@ -8,7 +8,7 @@
       <p><strong>Solicitudes contratadas:</strong></p>
       <ul>
   <li *ngFor="let servicio of listaServicios" class="list-group-item mb-3 border rounded p-3">
-    <!-- Si existe la propiedad 'mensaje', lo mostramos directamente -->
+
     <ng-container *ngIf="servicio.mensaje; else solicitudDetalle">
       {{ servicio.mensaje }}
     </ng-container>

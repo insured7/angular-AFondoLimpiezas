@@ -25,7 +25,6 @@ export class PresupuestoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Asegurar que el usuario está logueado (por si acaso)
     if (!this.authService.isLoggedIn()) {
       alert('Debes iniciar sesión para solicitar presupuesto.');
       this.router.navigate(['/login']);
@@ -52,7 +51,7 @@ export class PresupuestoComponent implements OnInit {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }),
-      responseType: 'text' // el backend responde texto plano
+      responseType: 'text'
     }).subscribe({
       next: (res) => {
         this.exito = true;

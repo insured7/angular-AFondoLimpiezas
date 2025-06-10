@@ -23,8 +23,6 @@ export class DashboardEmpleadoComponent implements OnInit {
 
     if (!token) {
       alert('No has iniciado sesión.');
-      // Aquí deberías redirigir a login con Angular Router, ejemplo:
-      // this.router.navigate(['/login']);
       return;
     }
 

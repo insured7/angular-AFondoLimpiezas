@@ -87,16 +87,16 @@ export class DashboardAdminComponent implements OnInit {
 
   this.http.post('http://localhost:8080/admin/solicitudes/asignar-empleado', body, {
     headers: this.getHeaders(),
-    responseType: 'text' // esperando texto plano del backend
+    responseType: 'text'
   }).subscribe({
     next: (res) => alert(res),
     error: (err) => {
-      // err puede ser un HttpErrorResponse
+
       let mensajeError = 'Error al asignar empleado.';
 
       if (err.error) {
         try {
-          // Intenta parsear mensaje JSON si el backend devuelve JSON en error
+
           const parsed = JSON.parse(err.error);
           if (parsed.message) {
             mensajeError = parsed.message;
@@ -104,7 +104,7 @@ export class DashboardAdminComponent implements OnInit {
             mensajeError = err.error;
           }
         } catch {
-          // Si no es JSON, úsalo tal cual si es string
+
           if (typeof err.error === 'string') {
             mensajeError = err.error;
           }

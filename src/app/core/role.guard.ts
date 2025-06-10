@@ -14,7 +14,7 @@ export const roleGuard: CanActivateFn = (route, state) => {
 
   if (!actualRole || expectedRole.toLowerCase() !== actualRole.toLowerCase()) {
     alert(`No tienes acceso al panel de ${expectedRole.toLowerCase()}.`);
-    router.navigate(['/login']); // mejor enviar a login si no tiene permiso
+    router.navigate(['/login']);
     return false;
   }
 
